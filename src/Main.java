@@ -2,7 +2,15 @@ import java.util.Scanner;
 
 public class Main
 {
+
     public static int chapter = 0;
+   static boolean mapMss = false;
+    static String cmd;
+    public static void setMss (String c)
+    {
+        mapMss = !mapMss;
+        cmd = c;
+    }
     public static void main (String[] unit)
     {
         System.out.println("Демо, билд 0.8");
@@ -15,8 +23,11 @@ public class Main
         m.loca();
         String command = "";
         gui.show(true);
+
+
         while (true)
         {
+
 
             if(gamestate == 0) {
                 gui.text.setText("<html>");
@@ -32,6 +43,12 @@ public class Main
                 m.showMinimap(2,gui);
                 m.showMinimap(3,gui);
                 m.showMinimap(4,gui);
+            }
+            if(mapMss)
+            {
+                m.movement(cmd);
+                mapMss = !mapMss;
+                continue;
             }
             command = in.next();
 
@@ -59,7 +76,7 @@ public class Main
 
 
     }
-    private static void messegeListner (String command, Map_comm comment, int gamestate, Map m,Scanner in,Gamemaster gm)
+   private static void messegeListner (String command, Map_comm comment, int gamestate, Map m,Scanner in,Gamemaster gm)
     {
         if(command.equals("Назад") || command.equals("Вперед") || command.equals("Вправо") || command.equals("Влево")||command.equals("w")||command.equals("a")||command.equals("s")||command.equals("d"))
         {
